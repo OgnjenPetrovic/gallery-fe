@@ -8,15 +8,17 @@ export class GalleryComponentResolver implements Resolve<any> {
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
 
+    // If author page is active
     if (route.paramMap.get('id') !== null) {
       return this.galleryService.getAuthorGalleries(route.paramMap.get('id'));
     }
 
-
+    // If my gallery page is active
     if (route.url.length > 0) {
       return this.galleryService.getLoggedUserGalleries();
     }
 
+    // if non above active
     return this.galleryService.getGalleries();
   }
 }
